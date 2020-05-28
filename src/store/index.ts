@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 
-const rootReducer = combineReducers({
+import { alert } from './alert.reducer'
 
+const rootReducer = combineReducers({
+    alert
 })
 
 export const store = createStore(rootReducer)
