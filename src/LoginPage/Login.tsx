@@ -32,7 +32,7 @@ const Login = () => {
             }}
         >
             {formik => (
-                <form onSubmit={formik.handleSubmit} noValidate autoComplete="off">
+                <Form>
                     <Paper elevation={0} className={classes.paper}>
                         <Typography variant="h4" gutterBottom>Login</Typography>
                         <FormInput
@@ -50,7 +50,7 @@ const Login = () => {
                         <Button variant="contained" color="primary" type="submit">Login</Button>
                         <Button component={Link} to="/register" color="primary">Registration</Button>
                     </Paper>
-                </form>
+                </Form>
             )}
         </Formik>
     )
