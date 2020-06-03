@@ -5,6 +5,10 @@ import { store } from './store'
 
 import { App } from './App';
 
+//fake backend
+import { configureFakeBackend } from './helpers'
+configureFakeBackend()
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
