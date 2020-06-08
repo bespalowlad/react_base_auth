@@ -1,3 +1,5 @@
+![alt text](https://github.com/bespalowlad/react_base_auth/blob/master/src/screenshots/my_app.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
