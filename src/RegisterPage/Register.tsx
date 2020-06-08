@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom'
@@ -8,9 +9,11 @@ import Button from '@material-ui/core/Button';
 import { useStyles } from '../styles'
 
 import { FormInput } from '../components'
+import { register } from '../actions/user.action'
 
 const Register = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
 
     return (
         <Formik
@@ -39,6 +42,8 @@ const Register = () => {
             onSubmit={(values) => {
                 console.log('submit!')
                 console.log('values: ', values)
+
+                dispatch(register(values))
             }}
         >
             {formik => (

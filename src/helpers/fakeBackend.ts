@@ -1,21 +1,12 @@
-interface IUser {
-    id: number
-    username: string
-    firstName: string
-    lastName: string
-    password: string
-    token: 'fake-jwt-token'
-}
+import { IUser, TUserResponse } from '../types/user.types'
 
-type TUserResponse = Omit<IUser, 'password'>
-
-interface IOptions {
+export interface IOptions {
     method: 'POST' | 'GET' | 'DELETE'
     headers: any
     body: string
 }
 
-interface IResponse {
+export interface IResponse {
     ok?: boolean
     status?: number
     text: () => Promise<string>
@@ -28,7 +19,7 @@ declare global {
 }
 
 // array in local storage for registered users
-let users: IUser[] | [] = JSON.parse(localStorage.getItem('users')!) || []
+let users: IUser[] = JSON.parse(localStorage.getItem('users')!) || []
 
 function configureFakeBackend() {
     let realFetch = window.fetch
