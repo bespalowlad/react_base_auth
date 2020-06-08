@@ -1,4 +1,4 @@
-import { TUserResponse, IMessageResponse } from '../types/user.types'
+import { TUserResponse, IMessageResponse } from '../types/api.types'
 
 export interface IResponse extends Response {
     text: () => Promise<any>

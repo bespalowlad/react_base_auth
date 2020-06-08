@@ -1,4 +1,4 @@
-import { IUser, TUserResponse } from '../types/user.types'
+import { IUser, TUserResponse } from '../types/api.types'
 
 export interface IOptions {
     method: 'POST' | 'GET' | 'DELETE'

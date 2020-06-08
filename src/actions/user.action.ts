@@ -2,6 +2,7 @@ import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
 import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from '../constants/register.constants'
+import { TRegisterRequestAction, TRegisterSuccessAction, TRegisterFailureAction } from '../types/user.types'
 import { api } from '../api'
 import { TRootState } from '../store'
 import { alertAction } from './alert.actions'
@@ -20,14 +21,14 @@ export const register = <T>(user: T): ThunkAction<Promise<any>, TRootState, unkn
     }
 }
 
-export const registerRequest = () => ({
+export const registerRequest = (): TRegisterRequestAction => ({
     type: REGISTER_REQUEST
 })
 
-export const registerSuccess = () => ({
+export const registerSuccess = (): TRegisterSuccessAction => ({
     type: REGISTER_SUCCESS
 })
 
-export const registerFailure = () => ({
+export const registerFailure = (): TRegisterFailureAction => ({
     type: REGISTER_FAILURE
 })

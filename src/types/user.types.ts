@@ -1,14 +1,13 @@
-export interface IUser {
-    id: number
-    username: string
-    firstName: string
-    lastName: string
-    password: string
-    token: 'fake-jwt-token'
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from '../constants/register.constants'
+
+export type TRegisterRequestAction = {
+    type: typeof REGISTER_REQUEST
 }
 
-export type TUserResponse = Omit<IUser, 'password'>
+export type TRegisterSuccessAction = {
+    type: typeof REGISTER_SUCCESS
+}
 
-export interface IMessageResponse {
-    message: string
+export type TRegisterFailureAction = {
+    type: typeof REGISTER_FAILURE
 }
