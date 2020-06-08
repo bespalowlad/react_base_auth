@@ -86,7 +86,9 @@ function configureFakeBackend() {
                 // assign user id and a few other properties then save
                 user.id = users.length ? Math.max(...(users as IUser[]).map((user: IUser) => user.id)) + 1 : 1;
 
-                users.push(user);
+                // users.push(user);
+                users = [...users, user]
+
                 localStorage.setItem('users', JSON.stringify(users));
 
                 return ok();
@@ -107,8 +109,7 @@ function configureFakeBackend() {
             }
 
             // helper functions
-
-            function ok(body: TUserResponse | TUserResponse[]) {
+            function ok(body?: TUserResponse | TUserResponse[]) {
                 resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(body)) });
             }
 
