@@ -1,11 +1,12 @@
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from '../constants/register.constants'
-import { TRegisterRequestAction, TRegisterSuccessAction, TRegisterFailureAction } from '../types/user.types'
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE, LOGIN, LOGOUT } from '../constants/userAction.constants'
+import { TRegisterRequestAction, TRegisterSuccessAction, TRegisterFailureAction, TLoginAction, TLogoutAction } from '../types/userAction.types'
 import { api } from '../api'
 import { TRootState } from '../store'
 import { alertAction } from './alert.actions'
+import { ICurrentUser } from '../types/currentUser.types'
 
 export const register = <T>(user: T): ThunkAction<Promise<any>, TRootState, unknown, Action<string>> => async dispatch => {
     console.log('action/register')
@@ -31,4 +32,13 @@ export const registerSuccess = (): TRegisterSuccessAction => ({
 
 export const registerFailure = (): TRegisterFailureAction => ({
     type: REGISTER_FAILURE
+})
+
+export const login = (user: ICurrentUser): TLoginAction => ({
+    type: LOGIN,
+    user
+})
+
+export const logout = (): TLogoutAction => ({
+    type: LOGOUT
 })

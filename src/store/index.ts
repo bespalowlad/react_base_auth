@@ -5,12 +5,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { alert } from './alert.reducer'
 import { register } from './register.reducer'
+import { currentUser } from './currentUser.reducer'
 
 const loggerMiddleware = createLogger()
 
 const rootReducer = combineReducers({
     alert,
-    register
+    register,
+    currentUser
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(

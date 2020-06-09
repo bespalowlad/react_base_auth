@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import { useStyles } from '../styles'
 
 import { FormInput } from '../components'
-import { register } from '../actions/user.action'
+import { register } from '../actions/user.actions'
 
 const Register = () => {
     const classes = useStyles()

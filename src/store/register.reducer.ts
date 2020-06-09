@@ -1,6 +1,6 @@
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from '../constants/register.constants'
-import { TRegisterRequestAction, TRegisterSuccessAction, TRegisterFailureAction } from '../types/user.types'
-import { registerRequest, registerSuccess, registerFailure } from '../actions/user.action'
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from '../constants/userAction.constants'
+import { TRegisterRequestAction, TRegisterSuccessAction, TRegisterFailureAction } from '../types/userAction.types'
+import { registerRequest, registerSuccess, registerFailure } from '../actions/user.actions'
 
 interface IState {
     registering?: Boolean

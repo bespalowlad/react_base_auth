@@ -9,6 +9,7 @@ import { useStyles } from '../styles'
 import { TRootState } from '../store'
 
 import { PrivateRoute } from '../components'
+import { Header } from '../Header'
 import { Home } from '../HomePage'
 import { Login } from '../LoginPage'
 import { Register } from '../RegisterPage'
@@ -18,30 +19,33 @@ function App() {
   const alert = useSelector((state: TRootState) => state.alert)
 
   return (
-    <div className="App">
-      <Container>
-        {alert.message &&
-          <div className={classes.alert}>
-            {alert.type === 'error' ?
-              <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-                <strong>{alert.message}</strong>
-              </Alert> :
-              <Alert severity="success">
-                <AlertTitle>Success</AlertTitle>
-                <strong>{alert.message}</strong>
-              </Alert>}
-          </div>
-        }
-        <Router>
-          <Switch>
-            <PrivateRoute exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </Switch>
-        </Router>
-      </Container>
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <main>
+          <Container>
+            {alert.message &&
+              <div className={classes.alert}>
+                {alert.type === 'error' ?
+                  <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    <strong>{alert.message}</strong>
+                  </Alert> :
+                  <Alert severity="success">
+                    <AlertTitle>Success</AlertTitle>
+                    <strong>{alert.message}</strong>
+                  </Alert>}
+              </div>
+            }
+            <Switch>
+              <PrivateRoute exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+            </Switch>
+          </Container>
+        </main>
+      </div>
+    </Router>
   );
 }
 
