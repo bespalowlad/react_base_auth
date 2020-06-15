@@ -6,7 +6,7 @@ interface IState {
     user: null | ICurrentUser
 }
 
-const initialState = {
+const initialState: IState = {
     user: null
 }
 

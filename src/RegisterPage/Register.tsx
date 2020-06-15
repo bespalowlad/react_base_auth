@@ -39,11 +39,11 @@ const Register = () => {
                     .max(8, 'Must be 8 characters or less')
                     .required('Required')
             })}
-            onSubmit={(values) => {
+            onSubmit={async (values) => {
                 console.log('submit!')
                 console.log('values: ', values)
 
-                dispatch(register(values))
+                await dispatch(register(values))
             }}
         >
             {formik => (

@@ -6,6 +6,7 @@ export interface IResponse extends Response {
 
 export interface IApi {
     register: (user: any) => Promise<any>
+    login: (username: string, password: string) => Promise<any>
     handleResponse: (response: IResponse) => Promise<any>
 }
 
@@ -22,6 +23,16 @@ class Api implements IApi {
         return fetch('/users/register', requestOptions).then(this.handleResponse)
     }
 
+    login(username: string, password: string) {
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            headers: { 'Content-Type': 'applications/json' },
+            body: JSON.stringify({ username, password })
+        }
+
+        return fetch('/users/authenticate', requestOptions).then(this.handleResponse)
+    }
+
     handleResponse(response: IResponse) {
         return response.text().then(text => {
             const data: TUserResponse | IMessageResponse = text && JSON.parse(text)
@@ -34,6 +45,8 @@ class Api implements IApi {
                 const error = (data && (data as IMessageResponse).message) || response.statusText
                 return Promise.reject(error)
             }
+
+            localStorage.setItem('token', (data as TUserResponse).token)
 
             return data
         })

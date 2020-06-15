@@ -63,6 +63,7 @@ function configureFakeBackend() {
                     username: user.username,
                     firstName: user.firstName,
                     lastName: user.lastName,
+                    email: user.email,
                     token: 'fake-jwt-token'
                 });
             }
@@ -82,7 +83,13 @@ function configureFakeBackend() {
 
                 localStorage.setItem('users', JSON.stringify(users));
 
-                return ok();
+                const { password, ...currentUser } = user
+                console.log('currentUser: ', currentUser)
+
+                return ok({
+                    ...currentUser,
+                    token: 'fake-jwt-token'
+                });
             }
 
             function getUsers() {
