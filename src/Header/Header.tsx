@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { TRootState } from '../store'
 
 import { Container } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
     const user = useSelector((state: TRootState) => state.currentUser.user)
+    const loggedIn = useSelector((state: TRootState) => state.authenticate.loggedIn)
 
     return (
         <header>
@@ -18,13 +19,13 @@ const Header = () => {
                         </li>
                     </ul>
                 </nav>
-                {!user ?
+                {user && loggedIn ?
+                    <div className="user">
+                        Здравствуйте, {user.username}
+                    </div> :
                     <div className="controls">
                         <Link to="/login">Login</Link>
                         <Link to="/register">Registration</Link>
-                    </div> :
-                    <div className="user">
-                        Здравствуйте, {user.username}
                     </div>
                 }
             </Container>

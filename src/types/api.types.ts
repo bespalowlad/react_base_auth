@@ -5,7 +5,8 @@ export interface IUser {
     lastName: string
     password: string
     email: string
-    token: 'fake-jwt-token'
+    // token: 'fake-jwt-token'
+    token: string
 }
 
 export type TUserResponse = Omit<IUser, 'password'>

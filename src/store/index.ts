@@ -6,13 +6,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { alert } from './alert.reducer'
 import { register } from './register.reducer'
 import { currentUser } from './currentUser.reducer'
+import { authenticate } from './authenticate.reducer'
 
 const loggerMiddleware = createLogger()
 
 const rootReducer = combineReducers({
     alert,
     register,
-    currentUser
+    currentUser,
+    authenticate
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(

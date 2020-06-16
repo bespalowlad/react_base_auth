@@ -1,7 +1,7 @@
 import { AUTHENTICATE_REQUEST, AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILURE } from '../constants/userAction.constants'
 import { TAuthenticateRequestAction, TAuthenticateSuccessAction, TAuthenticateFailureAction } from '../types/userAction.types'
 
-const loggedIn: boolean = !!localStorage.getItem('user')
+const loggedIn: boolean = !!localStorage.getItem('token')
 
 interface IState {
     loggedIn: boolean

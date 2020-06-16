@@ -16,7 +16,7 @@ export type TRegisterFailureAction = {
 
 export type TLoginAction = {
     type: typeof LOGIN,
-    user: ICurrentUser
+    user: TUserResponse
 }
 
 export type TLogoutAction = {

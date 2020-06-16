@@ -13,7 +13,7 @@ import { Route, Redirect, RouteProps } from 'react-router-dom'
 
 
 const PrivateRoute: React.FC<RouteProps> = (props) => {
-    return localStorage.getItem('users') ?
+    return localStorage.getItem('token') ?
         <Route {...props} /> :
         <Redirect to="/login" />
 }

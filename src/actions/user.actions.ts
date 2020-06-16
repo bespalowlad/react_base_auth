@@ -15,11 +15,12 @@ export const register = <T>(user: T): ThunkAction<Promise<any>, TRootState, unkn
     dispatch(registerRequest())
 
     try {
-        const data: any = await api.register(user)
-        const currentUser: ICurrentUser = { username: data.username }
+        const currentUser: any = await api.register(user)
+        // const currentUser: ICurrentUser = { username: data.username }
 
         dispatch(alertAction.success('Registration successful'))
         dispatch(login(currentUser))
+        // localStorage.setItem('token', (currentUser as TUserResponse).token)
     } catch (error) {
         dispatch(registerFailure())
         dispatch(alertAction.error(error))
@@ -39,7 +40,7 @@ export const registerFailure = (): TRegisterFailureAction => ({
     type: REGISTER_FAILURE
 })
 
-export const login = (user: ICurrentUser): TLoginAction => ({
+export const login = (user: TUserResponse): TLoginAction => ({
     type: LOGIN,
     user
 })
@@ -47,6 +48,25 @@ export const login = (user: ICurrentUser): TLoginAction => ({
 export const logout = (): TLogoutAction => ({
     type: LOGOUT
 })
+
+export const authenticate = (username: string, password: string): ThunkAction<Promise<any>, TRootState, unknown, Action<string>> => async dispatch => {
+    console.log('action/authenticate')
+
+    dispatch(authenticateRequest())
+
+    try {
+        const currentUser: any = await api.login(username, password)
+
+        dispatch(alertAction.success('Login successful'))
+        // dispatch(authenticateSuccess(username, password))
+        dispatch(login(currentUser))
+        localStorage.setItem('token', (currentUser as TUserResponse).token)
+    } catch (error) {
+        dispatch(authenticateFailure())
+        dispatch(alertAction.error(error))
+        dispatch(logout())
+    }
+}
 
 export const authenticateRequest = (): TAuthenticateRequestAction => ({
     type: AUTHENTICATE_REQUEST
@@ -60,4 +80,15 @@ export const authenticateSuccess = (username: string, password: string): TAuthen
 export const authenticateFailure = (): TAuthenticateFailureAction => ({
     type: AUTHENTICATE_FAILURE
 })
+
+export const profileFetch = (token: string): ThunkAction<Promise<any>, TRootState, unknown, Action<string>> => async dispatch => {
+    console.log('action/profileFetch')
+
+    try {
+        const currentUser: any = await api.profileFetch(token)
+        dispatch(login(currentUser))
+    } catch (error) {
+        console.log('PROFILE FETCH FAILURE!')
+    }
+}
 

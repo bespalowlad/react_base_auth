@@ -1,9 +1,9 @@
-import { ICurrentUser } from '../types/currentUser.types'
 import { TLoginAction, TLogoutAction } from '../types/userAction.types'
 import { LOGIN, LOGOUT } from '../constants/userAction.constants'
+import { TUserResponse } from '../types/api.types'
 
 interface IState {
-    user: null | ICurrentUser
+    user: null | TUserResponse
 }
 
 const initialState: IState = {

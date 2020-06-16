@@ -42,6 +42,8 @@ function configureFakeBackend() {
                         return getUsers();
                     case url.match(/\/users\/\d+$/) && method === 'DELETE':
                         return deleteUser();
+                    case url.endsWith('/profile') && method === 'GET':
+                        return getProfile()
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)
@@ -64,7 +66,7 @@ function configureFakeBackend() {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
-                    token: 'fake-jwt-token'
+                    token: `fake-jwt-token-${user.id}`
                 });
             }
 
@@ -87,9 +89,26 @@ function configureFakeBackend() {
                 console.log('currentUser: ', currentUser)
 
                 return ok({
-                    ...currentUser,
-                    token: 'fake-jwt-token'
+                    ...currentUser
                 });
+            }
+
+            function getProfile() {
+                if (headers['Authorization'].includes('Bearer fake-jwt-token')) {
+                    const token: string = headers['Authorization'].split(' ')[1]
+                    const user: IUser | undefined = users.find(user => user.token === token)
+
+                    if (user) {
+                        return ok({
+                            id: user.id,
+                            username: user.username,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            email: user.email,
+                            token: `fake-jwt-token-${user.id}`
+                        })
+                    }
+                }
             }
 
             function getUsers() {

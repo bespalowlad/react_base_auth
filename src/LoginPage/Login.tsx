@@ -2,24 +2,28 @@ import React from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useStyles } from '../styles'
 
 import { FormInput } from '../components'
+import { authenticate } from '../actions/user.actions'
 
 const Login = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
 
     return (
         <Formik
             initialValues={{
-                name: '',
+                username: '',
                 password: ''
             }}
             validationSchema={Yup.object({
-                name: Yup.string()
+                username: Yup.string()
                     .required('Required'),
                 password: Yup.string()
                     .min(4, 'Must be 4 characters or more')
@@ -29,6 +33,9 @@ const Login = () => {
             onSubmit={(values) => {
                 console.log('submit!')
                 console.log('values: ', values)
+
+                const { username, password } = values
+                dispatch(authenticate(username, password))
             }}
         >
             {formik => (
@@ -36,10 +43,10 @@ const Login = () => {
                     <Paper elevation={0} className={classes.paper}>
                         <Typography variant="h4" gutterBottom>Login</Typography>
                         <FormInput
-                            label="name"
-                            name="name"
+                            label="username"
+                            name="username"
                             type="text"
-                            placeholder="name"
+                            placeholder="username"
                         />
                         <FormInput
                             label="password"

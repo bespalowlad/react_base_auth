@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Container } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -13,10 +13,20 @@ import { Header } from '../Header'
 import { Home } from '../HomePage'
 import { Login } from '../LoginPage'
 import { Register } from '../RegisterPage'
+import { profileFetch } from '../actions/user.actions'
 
 function App() {
   const classes = useStyles()
   const alert = useSelector((state: TRootState) => state.alert)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      dispatch(profileFetch(token))
+    }
+  }, [])
 
   return (
     <Router>
