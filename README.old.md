@@ -1,1 +1,0 @@
-# react_base_auth

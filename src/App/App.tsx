@@ -1,62 +1,38 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import { Container } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
-import { useDispatch, useSelector } from 'react-redux'
-import classNames from 'classnames'
-import { useStyles } from '../styles'
+import React from 'react';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 
-import { TRootState } from '../store'
-
-import { PrivateRoute } from '../components'
-import { Header } from '../Header'
-import { Home } from '../HomePage'
-import { Login } from '../LoginPage'
-import { Register } from '../RegisterPage'
-import { profileFetch } from '../actions/user.actions'
+import { Home } from '../Home'
+import { Login } from '../Login'
+import { Registr } from '../Registr'
 
 function App() {
-  const classes = useStyles()
-  const alert = useSelector((state: TRootState) => state.alert)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-
-    if (token) {
-      dispatch(profileFetch(token))
-    }
-  }, [])
-
   return (
     <Router>
       <div className="App">
-        <Header />
-        <main>
-          <Container>
-            {alert.message &&
-              <div className={classes.alert}>
-                {alert.type === 'error' ?
-                  <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    <strong>{alert.message}</strong>
-                  </Alert> :
-                  <Alert severity="success">
-                    <AlertTitle>Success</AlertTitle>
-                    <strong>{alert.message}</strong>
-                  </Alert>}
-              </div>
-            }
-            <Switch>
-              <PrivateRoute exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-            </Switch>
-          </Container>
-        </main>
+        <div className="header">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/registr">Registration</Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/registr" component={Registr} />
+          </Switch>
+        </div>
       </div>
     </Router>
-  );
+  )
 }
 
 export default App;
