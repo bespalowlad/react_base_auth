@@ -29,7 +29,16 @@ function App() {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" render={() =>
+                <Login
+                  initialData={{
+                    email: '',
+                    password: ''
+                  }}
+                  onSubmit={(values) => {
+                    console.log('> values ', values)
+                  }}
+                />} />
               <Route exact path="/registr" render={() =>
                 <Registr
                   initialData={{
@@ -37,7 +46,9 @@ function App() {
                     email: '',
                     password: ''
                   }}
-                  onSubmit={() => { }}
+                  onSubmit={(values) => {
+                    console.log('> values ', values)
+                  }}
                 />} />
             </Switch>
           </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import './inputField.scss'
 
 interface IProps {
     label: string
