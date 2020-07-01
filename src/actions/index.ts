@@ -1,1 +1,1 @@
-export * from './user.actions'
+export { registrRequest, registrSuccess, registrFailure, signup } from './user.actions'

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
@@ -39,17 +39,7 @@ function App() {
                     console.log('> values ', values)
                   }}
                 />} />
-              <Route exact path="/registr" render={() =>
-                <Registr
-                  initialData={{
-                    name: '',
-                    email: '',
-                    password: ''
-                  }}
-                  onSubmit={(values) => {
-                    console.log('> values ', values)
-                  }}
-                />} />
+              <Route exact path="/registr" component={Registr} />
             </Switch>
           </div>
         </div>

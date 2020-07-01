@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { InputField } from '../shared'
+import { signup } from '../actions'
 
 interface IinitialData {
     name: string
@@ -7,17 +9,17 @@ interface IinitialData {
     password: string
 }
 
-interface IProps {
-    initialData: IinitialData
-    onSubmit: (state: IinitialData) => void
-}
-
-const Registr: React.FC<IProps> = ({ initialData, onSubmit }) => {
-    const [state, setState] = useState<IinitialData>(initialData)
+const Registr: React.FC = () => {
+    const dispatch = useDispatch()
+    const [state, setState] = useState<IinitialData>({
+        name: '',
+        email: '',
+        password: ''
+    })
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault()
-        onSubmit(state)
+        dispatch(signup(state))
     }
 
     const handleChange = (field: string) => (value: string) => {

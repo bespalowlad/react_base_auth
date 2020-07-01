@@ -1,20 +1,16 @@
 import axios from 'axios'
-
-interface IUserData {
-    name: string
-    email: string
-    password: string
-}
+import { IUserData } from '../types'
 
 interface IApi {
-    registr: (userData: IUserData) => Promise<any>
+    signup: (userData: IUserData) => Promise<any>
 }
 
 class Api implements IApi {
-    private baseUrl = `https://nodejs-registration-api.herokuapp.com/`
+    private baseUrl = `https://nodejs-registration-api.herokuapp.com`
+    // private baseUrl = `http://localhost:5000`
 
-    registr(userData: IUserData): Promise<any> {
-        return axios.post(`${this.baseUrl}/users`, JSON.stringify(userData))
+    signup(userData: IUserData): Promise<any> {
+        return axios.post(`${this.baseUrl}/users`, userData)
     }
 }
 
