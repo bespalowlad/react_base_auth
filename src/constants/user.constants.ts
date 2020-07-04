@@ -3,3 +3,11 @@ export const REGISTR_REQUEST = 'REGISTR_REQUEST'
 export const REGISTR_SUCCESS = 'REGISTR_SUCCESS'
 
 export const REGISTR_FAILURE = 'REGISTR_FAILURE'
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST'
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+
+export const LOGOUT = 'LOGOUT'

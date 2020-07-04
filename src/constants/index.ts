@@ -1,5 +1,9 @@
 export {
     REGISTR_REQUEST,
     REGISTR_SUCCESS,
-    REGISTR_FAILURE
+    REGISTR_FAILURE,
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    LOGOUT
 } from './user.constants'

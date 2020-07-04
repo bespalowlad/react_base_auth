@@ -1,1 +1,12 @@
-export { registrRequest, registrSuccess, registrFailure, signup } from './user.actions'
+export {
+    registrRequest,
+    registrSuccess,
+    registrFailure,
+    signup,
+    loginRequest,
+    loginSuccess,
+    loginFailure,
+    signin,
+    fetchProfile,
+    logout
+} from './user.actions'

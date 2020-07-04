@@ -1,8 +1,10 @@
 import axios from 'axios'
-import { IUserData } from '../types'
+import { IUserData, IUserLoginData } from '../types'
 
 interface IApi {
     signup: (userData: IUserData) => Promise<any>
+    signin: (userData: IUserLoginData) => Promise<any>
+    fetchProfile: (token: string) => Promise<any>
 }
 
 class Api implements IApi {
@@ -11,6 +13,16 @@ class Api implements IApi {
 
     signup(userData: IUserData): Promise<any> {
         return axios.post(`${this.baseUrl}/users`, userData)
+    }
+
+    signin(userData: IUserLoginData): Promise<any> {
+        return axios.post(`${this.baseUrl}/users/login`, userData)
+    }
+
+    fetchProfile(token: string): Promise<any> {
+        return axios.get(`${this.baseUrl}/users/me`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        })
     }
 }
 

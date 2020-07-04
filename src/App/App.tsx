@@ -1,50 +1,62 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Home } from '../Home'
 import { Login } from '../Login'
 import { Registr } from '../Registr'
-import { store } from '../store'
+import { fetchProfile, logout } from '../actions'
+import { StateType } from '../store'
 
 function App() {
-  return (
-    <Provider store={store}>
-      <Router>
-        <div className="App">
-          <div className="header">
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/registr">Registration</Link>
-              </li>
-            </ul>
-          </div>
+  const dispatch = useDispatch()
+  const user = useSelector((state: StateType) => state.user.user)
 
+  useEffect(() => {
+    const token: string | null = localStorage.getItem('token')
+
+    if (token) {
+      dispatch(fetchProfile(token))
+    }
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    dispatch(logout())
+  }
+
+  return (
+    <Router>
+      <div className="App">
+        <div className="header">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/registr">Registration</Link>
+            </li>
+          </ul>
           <div>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" render={() =>
-                <Login
-                  initialData={{
-                    email: '',
-                    password: ''
-                  }}
-                  onSubmit={(values) => {
-                    console.log('> values ', values)
-                  }}
-                />} />
-              <Route exact path="/registr" component={Registr} />
-            </Switch>
+            {!!user && <div>
+              <p>{user.name}</p>
+              <button onClick={handleLogout}>Logout!</button>
+            </div>}
           </div>
         </div>
-      </Router>
-    </Provider>
+
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/registr" component={Registr} />
+          </Switch>
+        </div>
+      </div>
+    </Router>
   )
 }
 

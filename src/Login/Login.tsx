@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { InputField } from '../shared/'
+import { signin } from '../actions'
 
 interface IinitialData {
     email: string
     password: string
 }
 
-interface IProps {
-    initialData: IinitialData
-    onSubmit: (state: IinitialData) => void
-}
-
-const Login: React.FC<IProps> = ({ initialData, onSubmit }) => {
-    const [state, setState] = useState<IinitialData>(initialData)
+const Login: React.FC = () => {
+    const dispatch = useDispatch()
+    const [state, setState] = useState<IinitialData>({
+        email: '',
+        password: ''
+    })
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault()
-        onSubmit(state)
+        dispatch(signin(state))
     }
 
     const handleChange = (field: string) => (value: string) => {
