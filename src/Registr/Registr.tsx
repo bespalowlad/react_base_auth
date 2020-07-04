@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { InputField } from '../shared'
-import { signup } from '../actions'
+import { signup, logout } from '../actions'
 
 interface IinitialData {
     name: string
@@ -16,6 +16,11 @@ const Registr: React.FC = () => {
         email: '',
         password: ''
     })
+
+    useEffect(() => {
+        localStorage.removeItem('token')
+        dispatch(logout())
+    }, [])
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault()

@@ -7,6 +7,7 @@ import { Login } from '../Login'
 import { Registr } from '../Registr'
 import { fetchProfile, logout } from '../actions'
 import { StateType } from '../store'
+import { PrivateRoute } from '../shared'
 
 function App() {
   const dispatch = useDispatch()
@@ -50,7 +51,8 @@ function App() {
 
         <div>
           <Switch>
-            <Route exact path="/" component={Home} />
+            {/* <Route exact path="/" component={Home} /> */}
+            <PrivateRoute exact isAuth={!!user} path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/registr" component={Registr} />
           </Switch>

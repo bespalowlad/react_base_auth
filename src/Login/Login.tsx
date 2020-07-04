@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { InputField } from '../shared/'
-import { signin } from '../actions'
+import { signin, logout } from '../actions'
+import { StateType } from '../store'
 
 interface IinitialData {
     email: string
@@ -10,10 +11,18 @@ interface IinitialData {
 
 const Login: React.FC = () => {
     const dispatch = useDispatch()
+    // const loginRequest = useSelector((state: StateType) => state.user.loginRequest)
     const [state, setState] = useState<IinitialData>({
         email: '',
         password: ''
     })
+
+    useEffect(() => {
+        // if (!loginRequest) {
+        localStorage.removeItem('token')
+        dispatch(logout())
+        // }
+    }, [])
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault()
