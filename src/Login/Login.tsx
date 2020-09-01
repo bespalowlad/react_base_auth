@@ -11,17 +11,15 @@ interface IinitialData {
 
 const Login: React.FC = () => {
     const dispatch = useDispatch()
-    // const loginRequest = useSelector((state: StateType) => state.user.loginRequest)
     const [state, setState] = useState<IinitialData>({
         email: '',
         password: ''
     })
 
     useEffect(() => {
-        // if (!loginRequest) {
-        localStorage.removeItem('token')
-        dispatch(logout())
-        // }
+        console.log('>> Login mount')
+        // localStorage.removeItem('token')
+        // dispatch(logout())
     }, [])
 
     const handleSubmit = (event: React.FormEvent) => {

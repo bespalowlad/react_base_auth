@@ -83,10 +83,8 @@ export const fetchProfile = (token: string): ThunkAction<Promise<any>, StateType
 
     try {
         const { data } = await api.fetchProfile(token)
-        console.log('>> data: ', data)
         const { _id: id, name, email } = data
         dispatch(loginSuccess({ id, name, email }))
-        // localStorage.setItem('token', data.token)
     } catch (err) {
         dispatch(loginFailure())
     }

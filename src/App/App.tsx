@@ -14,6 +14,7 @@ function App() {
   const user = useSelector((state: StateType) => state.user.user)
 
   useEffect(() => {
+    console.log('>> App mount')
     const token: string | null = localStorage.getItem('token')
 
     if (token) {
